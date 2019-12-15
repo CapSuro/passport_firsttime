@@ -1,68 +1,90 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Process
 
-## Available Scripts
+Xác thực (XT), Xét Duyệt (XD), Lưu trữ (LT), Giám sát (GS), Hệ thống (HT)
 
-In the project directory, you can run:
+Cơ sở dữ liệu để đối chiếu thông tin: Resident
 
-### `npm start`
+Cơ sở dữ liệu làm Passport:  Passport
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Quy trình cấp hộ chiếu lần đầu:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```mermaid
+sequenceDiagram
+    participant ND
+    participant HT
+    participant XT
+    participant XD
+    participant LT
+   	ND ->>+ HT: Đăng ký online <br>& hẹn lịch nộp
+   	HT -->>- ND: Đăng ký và hẹn lịch <br> thành công
+   	HT ->> XT: Chuyển thông tin và lịch hẹn
+   	ND ->>+ XT: Nộp hồ sơ theo lịch
+   	XT ->>+ HT: Cập nhật nhận hồ sơ
+   	HT -->>- XT: Cập nhật thành công
+   	HT -->>- ND: Hồ sơ được tiếp nhận
+   	loop Xác thực
+   		XT ->> XT: Xác thực thông tin hồ sơ
+   	end
+   	rect rgb(200,200,200)
+   		alt xác thực thành công
+   		XT ->>+ HT: Xác thực thành công
+   		HT -->>- XT: Cập nhật trạng thái <br> thành công
+   		HT ->> HT: Cập nhật trạng thái <br> chờ duyệt
+   		HT ->> XD: Yêu cầu xét duyệt hồ sơ
+   		loop Xét duyệt
+   			XD ->> XD: Xét duyệt hồ sơ
+   		end
+   		rect rgb(180,180,180)
+            alt duyệt
+                XD ->>+ HT: Duyệt
+                HT -->>- XD: Cập nhật thành công
+                HT ->> HT: Cập nhật trạng thái duyệt
+                HT ->> ND: Đã duyệt
+                HT ->>+ LT: Yêu cầu lưu hồ sơ
+                LT ->> LT: Lưu hồ sơ
+                HT ->> HT: Chờ lưu
+                LT -->>- HT: Lưu thành công
+                HT ->> HT: Lưu thành công
+            else không duyệt
+                XD ->>+ HT: Không duyệt
+                HT -->>- XD: Cập nhật thành công
+                HT ->> HT: Cập nhật trạng thái không duyệt
+                HT ->> ND: Không duyệt
+            end
+   		end
+        else xác thực không thành công
+        	XT ->>+ HT: Không xác thực
+        	HT -->>- XT: Cập nhật thành công
+        	HT ->>ND: Hồ sơ không xác thực 
+        end
+   	end
+```
 
-### `npm test`
+# Trạng thái đơn
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Chờ nộp (CN)
+- Chờ xác thực (đã nộp) (CXT)
+- Chờ duyệt (đã xác thực) (CD)
+- Đã duyệt (DD)
+- Chờ lưu (người dân không thấy) (CL)
+- Đã lưu (người dân không thấy) (DL)
+- Không duyệt (KD)
+- Không xác thực (KXT)
 
-### `npm run build`
+# Bảng trong Passport
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```mermaid
+graph LR
+	Form --> State
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# Bảng trong Resident
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```mermaid
+graph LR
+	Reference -->|Người thân| Person
+	Person -->|Hộ khẩu| Address
+	Person --> Note
+	Address --> |Chủ hộ|Person
+```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
