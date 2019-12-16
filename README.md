@@ -25,7 +25,7 @@ sequenceDiagram
    	loop Xác thực
    		XT ->> XT: Xác thực thông tin hồ sơ
    	end
-   	rect rgb(200,200,200)
+   	rect rgb(25,25,25)
    		alt xác thực thành công
    		XT ->>+ HT: Xác thực thành công
    		HT -->>- XT: Cập nhật trạng thái <br> thành công
@@ -34,7 +34,7 @@ sequenceDiagram
    		loop Xét duyệt
    			XD ->> XD: Xét duyệt hồ sơ
    		end
-   		rect rgb(180,180,180)
+   		rect rgb(50,60,50)
             alt duyệt
                 XD ->>+ HT: Duyệt
                 HT -->>- XD: Cập nhật thành công
@@ -76,6 +76,12 @@ sequenceDiagram
 ```mermaid
 graph LR
 	Form --> State
+	Form --> Religion
+	Form --> Nation
+	Form --> Province
+	Form --> District
+	District --> Province
+	Form --> task
 ```
 
 # Bảng trong Resident
@@ -83,8 +89,121 @@ graph LR
 ```mermaid
 graph LR
 	Reference -->|Người thân| Person
+	Reference --> Address
 	Person -->|Hộ khẩu| Address
-	Person --> Note
 	Address --> |Chủ hộ|Person
+	Person --> Province
+	Address --> Province
+	Address --> District
+	District --> Province
 ```
+
+# Database Passport
+
+## Bảng Form
+
+- FormID: Number(12)
+- FormDate: Date
+- Name: varchar2(50)
+- Gender: varchar(5)
+- Birthday: Date
+- BirthPlace: varchar2(30)
+- PID: varchar(15): NULL
+- PIDDate: date: NULL
+- PIDPlace: varchar2(15)(30): NULL
+- Nation: varchar(10) **ref Nation**
+- Religion: varchar(50) **ref Religion**
+- AddressProvince: varchar2(30) **ref Province**
+- AddressDistrict: varchar2(30) **ref District**
+- AddressStreet: varchar2(200)
+-  TempAddProvince: varchar2(30): NULL **ref Province**
+- TempAddDistrict: varchar2(30):NULL **ref District**
+- TempAddStreet: text: NULL
+- Job: text: NULL
+- JobAddress: text: NULL
+- FatherFullName: varchar2(50): NULL
+- FatherBirthday: date: NULL
+- MotherFullName: varchar2(50): NULL
+- MotherBirthday: date: NULL
+- HusbandWifeName: varchar2(50): NULL
+- HusbandWifeBirthdat: date: NULL
+- LastPassportNumber: varchar2(50): NULL
+- LastPassportDate: date: NULL
+- task: varchar2(5) **ref Task**
+- taskNote: varchar(200): NULL
+- ApointmentProvince: varchar2(30) **ref Province**
+- ApointmentAddress: text
+- FormState: varchar2(5) **ref State**
+
+## Bảng State
+
+- StateId: varchar2(5)
+- StateName: varchar2(50)
+
+## Bảng Religion
+
+- ReligionId: varchar2(5)
+- ReligionName: varchar2(50)
+
+## Bảng Nation
+
+- NationId: varchar2(5)
+- NationName: varchar2(50)
+
+## Bảng Task
+
+- TaskId: varchar2(5)
+
+- TaskName: text
+
+## Bảng Province
+
+- ProvinceId: varchar2(5)
+- ProvinceName: varchar2(50)
+
+## Bảng District
+
+- ProvinceId: varchar2(5) **ref Province**
+- DistrictId: varchar2(5)
+- DistrictName: varchar2(50)
+
+# Database Resident
+
+## Bảng Person
+
+- PersonalNumber: Number(13)
+- PID: varchar2(15): NULL
+- PIDPlace: **ref Province**: NULL
+- PIDDate: date: NULL
+- Name: varchar2(50)
+- Gender: varchar2(5)
+- BirthDay: date
+- BirthPlace: varchar2(5) **ref Province**
+- AddressId: varchar2(20) **ref Address**
+
+## Bảng Address
+
+- AddressId: varchar2(20)
+- AddressProvince: varchar2(5) **ref Province**
+- AddressDistrict: varchar2(5) **ref District**
+- AddressStreet: text
+- AddressHost: Number(13) **ref Person**
+
+## Bảng Reference
+
+- PersonalNumber1: Number(13)
+- PersonalNumber2: Number(13)
+- Relationship: varchar2(20)
+- Address: varchar2(20) **ref Address**
+
+## Bảng Province
+
+- ProvinceId: varchar2(5)
+- ProvinceName: varchar2(50)
+
+## Bảng District
+
+- ProvinceId: varchar2(5) **ref Province**
+- DistrictId: varchar2(5)
+- DistrictName: varchar2(50)
 
