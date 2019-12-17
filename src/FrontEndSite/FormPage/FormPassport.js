@@ -16,7 +16,18 @@ class FormComponent extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form;const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0,
+        },
+        sm: {
+          span: 16,
+          offset: 8,
+        },
+      },
+    };
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row>
@@ -124,13 +135,170 @@ class FormComponent extends React.Component {
             </Form.Item>
           </Col>
           <Col span={7} offset={1}>
-          <Form.Item label="Phone Number">
+            <Form.Item label="Phone Number">
               {getFieldDecorator('phoneumber', {
                 rules: [{ type: 'text', required: true, message: 'please input your Phone number' }]
-              })(<Input/>)}
+              })(<Input />)}
             </Form.Item>
           </Col>
         </Row>
+        <Row>
+          <Col span={8}>
+            <Form.Item label="Address Province">
+              {getFieldDecorator('addressprovince', {
+                rules: [{ required: false, message: 'please select your Address Province' }]
+              })(<Select>
+                <Option value="kinh">Kinh</Option>
+                <Option value="Bana">Bana</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+          <Col span={7} offset={1}>
+            <Form.Item label="Address District">
+              {getFieldDecorator('addresssdistrict', {
+                rules: [{ required: false, message: 'please select your Address District' }]
+              })(<Select>
+                <Option value="none">None</Option>
+                <Option value="bubdism">Bubdism</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+          <Col span={7} offset={1}>
+            <Form.Item label="Address Detail">
+              {getFieldDecorator('addressdetail', {
+                rules: [{ type: 'text', required: false, message: 'please input your Address Detail' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8}>
+            <Form.Item label="Tabernacle Address Province">
+              {getFieldDecorator('tabernacleaddressprovince', {
+                rules: [{ required: false, message: 'please select your Tabernacle Address Province' }]
+              })(<Select>
+                <Option value="kinh">Kinh</Option>
+                <Option value="Bana">Bana</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+          <Col span={7} offset={1}>
+            <Form.Item label="Tabernacle Address District">
+              {getFieldDecorator('tabernacleaddresssdistrict', {
+                rules: [{ required: false, message: 'please select your Tabernacle Address District' }]
+              })(<Select>
+                <Option value="none">None</Option>
+                <Option value="bubdism">Bubdism</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+          <Col span={7} offset={1}>
+            <Form.Item label="Tabernacle Address Detail">
+              {getFieldDecorator('tabernacleaddressdetail', {
+                rules: [{ type: 'text', required: false, message: 'please input your Tabernacle Address Detail' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={11}>
+            <Form.Item label="Job">
+              {getFieldDecorator('job', {
+                rules: [{ type: 'text', required: false, message: 'please input your Job' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={2}>
+            <Form.Item label="Job Address">
+              {getFieldDecorator('jobaddress', {
+                rules: [{ type: 'text', required: false, message: 'please input your Job Address' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={11}>
+            <Form.Item label="Father's Fullname">
+              {getFieldDecorator('fathername', {
+                rules: [{ type: 'text', message: 'Please input your father\'s fullname' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={2}>
+            <Form.Item label="Father's Birthday">
+              {getFieldDecorator('fatherbirthday', {
+                rules: [{ type: 'object', message: 'Please input your father\'s birthday' }]
+              })(<DatePicker />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={11}>
+            <Form.Item label="Mother's Fullname">
+              {getFieldDecorator('mothername', {
+                rules: [{ type: 'text', message: 'Please input your mother\'s fullname' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={2}>
+            <Form.Item label="Mother's Birthday">
+              {getFieldDecorator('motherbirthday', {
+                rules: [{ type: 'object', message: 'Please input your mother\'s birthday' }]
+              })(<DatePicker />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={11}>
+            <Form.Item label="Husband/Wife's Fullname">
+              {getFieldDecorator('husbandwifename', {
+                rules: [{ type: 'text', message: 'Please input your husbandwife\'s fullname' }]
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={2}>
+            <Form.Item label="Husband/Wife's Birthday">
+              {getFieldDecorator('husbandwifebirthday', {
+                rules: [{ type: 'object', message: 'Please input your husbandwife\'s birthday' }]
+              })(<DatePicker />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={11}>
+            <Form.Item label="Receiving Agency">
+              {getFieldDecorator('receivingagency', {
+                rules: [{
+                  required: true,
+                  message: 'Please select Receving Agency'
+                }]
+              })(<Select>
+                <Option value="province1">1</Option>
+                <Option value="province2">2</Option>
+                <Option value="province3">3</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={2}>
+            <Form.Item label="Receiving Address">
+              {getFieldDecorator('receivingaddress', {
+                rules: [{
+                  required: true,
+                  message: 'Please select Receving Address'
+                }]
+              })(<Select>
+                <Option value="province1">1</Option>
+                <Option value="province2">2</Option>
+                <Option value="province3">3</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
       </Form>
     );
   }

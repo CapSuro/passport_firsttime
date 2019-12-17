@@ -4,7 +4,7 @@ import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import { HomePage } from './../HomePage/HomePage';
 import { MonitorPage } from './../MonitorPage/MonitorPage';
-import { FormPage } from './../FormPage/FormPage';
+import { FormPage } from '../FormPage/FormPage';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
