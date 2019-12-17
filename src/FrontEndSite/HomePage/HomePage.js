@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const HomePage = (props) => {
-    return <h1>This is Home page</h1>
+    return <h1>This is HomePage</h1>
 }
