@@ -16,7 +16,8 @@ class FormComponent extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;const tailFormItemLayout = {
+    const { getFieldDecorator } = this.props.form;
+    const tailFormItemLayout = {
       wrapperCol: {
         xs: {
           span: 24,

@@ -50,3 +50,21 @@ span {
 #components-form-demo-normal-login .login-form-button {
     width: 100%;
 }
+
+.search_bar{
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    form{
+        min-width: 700px;
+        padding: 1em;
+        button{
+            margin-top: 0.25em;
+        }
+    }
+    table{
+        min-width: 700px;
+    }
+}

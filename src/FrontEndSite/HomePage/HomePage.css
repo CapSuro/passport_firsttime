@@ -45,4 +45,27 @@ span a {
 #components-form-demo-normal-login .login-form-button {
   width: 100%; }
 
+.search_bar {
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .search_bar form {
+    min-width: 700px;
+    padding: 1em; }
+    .search_bar form button {
+      margin-top: 0.25em; }
+  .search_bar table {
+    min-width: 700px; }
+
 /*# sourceMappingURL=HomePage.css.map */
