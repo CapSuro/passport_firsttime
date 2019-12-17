@@ -305,3 +305,8 @@ class FormComponent extends React.Component {
 }
 
 export const FormPassport = Form.create({ name: 'normal_login' })(FormComponent);
+
+
+
+
+//FIXME  NOT VALIDATE FORM
