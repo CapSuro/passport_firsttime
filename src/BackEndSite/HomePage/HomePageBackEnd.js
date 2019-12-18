@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-import { Button, Divider, Tag, Tooltip } from 'antd';
+import { Button, Tag, Tooltip } from 'antd';
 
 const { Column } = Table
 
@@ -54,9 +54,9 @@ export const HomePageBackEnd = (props) => {
             render={
                 (text, record) => (
                     <span>
-                        <Button type="primary">Recived</Button>
-                        <Divider type="vertical"></Divider>
-                        <Button type="danger">Checked</Button>
+                        {record.state === 'CN'
+                        ?<Button type="primary">Recived</Button>
+                        :<Button type="danger">Checked</Button>}
                     </span>
                 )
             } />

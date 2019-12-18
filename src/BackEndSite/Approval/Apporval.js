@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-import { Button, Divider, Tag, Tooltip } from 'antd';
+import { Button, Tag, Tooltip } from 'antd';
 
 const { Column } = Table
 
@@ -45,7 +45,7 @@ export const Approval = (props) => {
         <Column title="State" dataIndex="state" key="state" render={
             state => (<span>
                 <Tooltip title="Waiting for approval">
-                    <Tag color="blue">{state}
+                    <Tag color="black">{state}
                     </Tag>
                 </Tooltip>
             </span>)
