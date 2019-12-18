@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './FrontEndSite/HomePage/HomePage.css'
 import {BrowserRouter as Router, Route,Switch, Redirect} from 'react-router-dom';
-import { Entry } from './FrontEndSite/EntryPage/Entry';
+import { BackendEntry } from './BackEndSite/BackEndEntry/BackEndEntry';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/" component={Entry}></Route>
+          <Route path="/" component={BackendEntry}></Route>
           <Redirect to="/" />
         </Switch>
       </Router>
