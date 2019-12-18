@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap");
+.logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Abril Fatface', cursive;
+  color: white;
+  padding: 1em;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  position: relative; }
+
+.ant-layout-sider-collapsed .logo {
+  visibility: hidden;
+  position: relative;
+  height: 70px; }
+  .ant-layout-sider-collapsed .logo::before {
+    content: "QikP";
+    font-family: 'Abril Fatface', cursive;
+    color: white;
+    padding: 1em;
+    font-size: 1.2em;
+    letter-spacing: 0.05em;
+    position: relative;
+    visibility: visible;
+    height: 70px;
+    -webkit-transform: translateX(65px) translateY(-8px);
+            transform: translateX(65px) translateY(-8px); }
+
+span a {
+  color: white; }
+
+#components-form-demo-normal-login .login-form {
+  max-width: 300px; }
+
+#components-form-demo-normal-login .login-form-forgot {
+  float: right; }
+
+#components-form-demo-normal-login .login-form-button {
+  width: 100%; }
+
+.search_bar {
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .search_bar form {
+    min-width: 700px;
+    padding: 1em; }
+    .search_bar form button {
+      margin-top: 0.25em; }
+  .search_bar table {
+    min-width: 700px; }
+
+/*# sourceMappingURL=HomePage.css.map */
