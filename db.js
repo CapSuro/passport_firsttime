@@ -1,12 +1,11 @@
 const Orcl = require("oracledb");
 Orcl.outFormat = Orcl.OUT_FORMAT_OBJECT;
-
 module.exports = class DB {
   constructor() {
-    this.hostname = "192.168.188.128";
+    this.hostname = "SERVER";
     this.servicename = "orclpdb.localdomain";
-    this.username = "HR";
-    this.password = "hr";
+    this.username = "PASSPORT";
+    this.password = "PASSPORT";
   }
   async run() {
     let connection;
@@ -17,9 +16,8 @@ module.exports = class DB {
         connectString: `${this.hostname}:1521/${this.servicename}`
       });
 
-      const result = await connection.execute("SELECT * FROM REGIONS");
-
-      console.log(result.rows);
+      const result = await connection.execute("SELECT * FROM RELIGION");
+      console.log(result.rows)
     } catch (err) {
       console.log(err);
     } finally {
