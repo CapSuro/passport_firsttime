@@ -1,6 +1,5 @@
 import React from 'react';
-import React from 'react';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HomePageBackEnd } from './../HomePage/HomePageBackEnd';
@@ -8,7 +7,7 @@ import { Saving } from './../Saving/Saving';
 import { Approval } from './../Approval/Apporval';
 const { Header, Content, Footer, Sider } = Layout;
 
-export const Entry = (props) => {
+export const BackendEntry = (props) => {
     const [collapsed, setCollapsed] = useState(false);
     return (<Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>
