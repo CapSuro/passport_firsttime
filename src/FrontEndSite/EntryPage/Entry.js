@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HomePage } from './../HomePage/HomePage';
@@ -7,7 +7,6 @@ import { MonitorPage } from './../MonitorPage/MonitorPage';
 import { FormPage } from '../FormPage/FormPage';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 export const Entry = (props) => {
     const [collapsed, setCollapsed] = useState(false);
