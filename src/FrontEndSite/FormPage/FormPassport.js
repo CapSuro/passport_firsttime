@@ -343,56 +343,103 @@ class RegistrationForm extends React.Component {
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item label="Habitual Residence">
-          {getFieldDecorator('residence', {
-            initialValue: ['zhejiang', 'hangzhou', 'xihu'],
-            rules: [
-              { type: 'array', required: true, message: 'Please select your habitual residence!' },
-            ],
-          })(<Cascader options={residences} />)}
-        </Form.Item>
-        <Form.Item label="Phone Number">
-          {getFieldDecorator('phone', {
-            rules: [{ required: true, message: 'Please input your phone number!' }],
-          })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
-        </Form.Item>
-        <Form.Item label="Website">
-          {getFieldDecorator('website', {
-            rules: [{ required: true, message: 'Please input website!' }],
-          })(
-            <AutoComplete
-              dataSource={websiteOptions}
-              onChange={this.handleWebsiteChange}
-              placeholder="website"
-            >
-              <Input />
-            </AutoComplete>,
-          )}
-        </Form.Item>
-        <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-          <Row gutter={8}>
-            <Col span={12}>
-              {getFieldDecorator('captcha', {
-                rules: [{ required: true, message: 'Please input the captcha you got!' }],
+        <Row>
+          <Col span={8}>
+            <Form.Item label="Job">
+              {getFieldDecorator('job')(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={7} offset={1}>
+            <Form.Item label={
+              <span>Company&nbsp;
+              <Tooltip title="Company which you are working at">
+                  <Icon type="question-circle-o" />
+                </Tooltip></span>
+            }>
+              {getFieldDecorator('company')(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={7} offset={1}>
+            <Form.Item label="Company Address">
+              {getFieldDecorator('companyaddress')(<Input />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={6}>
+            <Form.Item label={
+              <span>Father Name&nbsp;
+              <Tooltip title="If you have father, you must input this field">
+                  <Icon type="question-circle-o" />
+                </Tooltip></span>
+            }>
+              {getFieldDecorator('fatherfullname')(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={5} offset={1}>
+            <Form.Item label="Father's Birthday">
+              {getFieldDecorator('fatherbirthday')(<DatePicker />)}
+            </Form.Item>
+          </Col>
+          <Col span={5} offset={1}>
+            <Form.Item label={<span>Mother's Fullname&nbsp;
+              <Tooltip title="If you have mother, you must input this field">
+                <Icon type="question-circle-o" />
+              </Tooltip></span>}>
+              {getFieldDecorator('motherfullname')(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={5} offset={1}>
+            <Form.Item label="Mother's Birthday">
+              {getFieldDecorator('motherbirthday')(<DatePicker />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={18}>
+            <Form.Item label="Husband/Wife Fullname">
+              {getFieldDecorator('husbandwifefullname')(<Input />)}
+            </Form.Item>
+          </Col>
+          <Col span={5} offset={1}>
+            <Form.Item label="Husband/Wife Birthday">
+              {getFieldDecorator('husbandwifebirthday')(<DatePicker />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <Form.Item label="Receiving Organization">
+              {getFieldDecorator('recievingorganization', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select receiving organization!'
+                  },
+                ],
+              })(<Select>
+                <Option value="1">Province 1</Option>
+                <Option value="2">Province 2</Option>
+                <Option value="3">Province 3</Option>
+              </Select>)}
+            </Form.Item>
+          </Col>
+          <Col span={11} offset={1}>
+            <Form.Item label="Receiving Address">
+              {getFieldDecorator('receivingaddress', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select receiving organization!'
+                  }
+                ]
               })(<Input />)}
-            </Col>
-            <Col span={12}>
-              <Button>Get captcha</Button>
-            </Col>
-          </Row>
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>
-              I have read the <a href="">agreement</a>
-            </Checkbox>,
-          )}
-        </Form.Item>
+            </Form.Item>
+          </Col>
+        </Row>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Register
+            Submit Form
           </Button>
         </Form.Item>
       </Form>
@@ -401,8 +448,3 @@ class RegistrationForm extends React.Component {
 }
 
 export const FormPassport = Form.create({ name: 'register' })(RegistrationForm);
-
-
-
-
-//FIXME  NOT VALIDATE FORM
