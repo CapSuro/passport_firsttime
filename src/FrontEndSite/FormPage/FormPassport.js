@@ -28,6 +28,9 @@ class RegistrationForm extends React.Component {
     });
   };
 
+  getProvinceOptions = () => 
+    <Option value="A">A</Option>
+  
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -76,7 +79,7 @@ class RegistrationForm extends React.Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} {...this.props}>
         <Row>
           <Col span={8}>
             <Form.Item label="Fullname">
@@ -112,15 +115,14 @@ class RegistrationForm extends React.Component {
                   },
                 ],
               })(<Select>
-                <Option value="dongthap">Dong Thap</Option>
-                <Option value="vinhlong">Vinh Long</Option>
+                {this.getProvinceOptions()}
               </Select>)}
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={6}>
-            <Form.Item label="Gender">
+            <Form.Item label="Gender" {...this.props}>
               {getFieldDecorator('gender', {
                 rules: [
                   {

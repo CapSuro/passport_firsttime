@@ -5,7 +5,7 @@ export const PassportReducer = (store, action) => {
         case ActionTypes.DATA_LOAD:
             return {
                 ...store,
-                [action.payload.dataType]: action.payload.data
+                [action.payload.dataType.toLowerCase()]: action.payload.data
             }    
         default:
             return store || {}

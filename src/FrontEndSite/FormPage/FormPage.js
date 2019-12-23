@@ -8,7 +8,7 @@ export const FormPage = (props) => {
         <Row>
             <Col span={4}></Col>
             <Col span={16} style={{marginTop: "2em", marginBottom:"2em"}}>
-                <FormPassport/>
+                <FormPassport {...props}/>
             </Col>
             <Col span={4}></Col>
         </Row>
