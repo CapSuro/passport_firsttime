@@ -19,3 +19,5 @@ function App() {
 }
 
 export default App;
+
+// NOTE: Need Redux here to load data Province, District, Nation and Religion
