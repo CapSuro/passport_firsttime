@@ -116,7 +116,7 @@ graph LR
 - AddressProvince: varchar2(30) **ref Province**
 - AddressDistrict: varchar2(30) **ref District**
 - AddressStreet: varchar2(200)
--  TempAddProvince: varchar2(30): NULL **ref Province**
+- TempAddProvince: varchar2(30): NULL **ref Province**
 - TempAddDistrict: varchar2(30):NULL **ref District**
 - TempAddStreet: text: NULL
 - Job: text: NULL
