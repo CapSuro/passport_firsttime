@@ -3,6 +3,6 @@ import {Select} from 'antd';
 
 const {Option} = Select;
 
-export const FormSelect = (props) => <React.Fragment>
-    <Option value="1">h1h1</Option>
-</React.Fragment>
+export const FormSelect = (props) => (<Select>
+    <Option value="h">Hehe</Option>
+</Select>)

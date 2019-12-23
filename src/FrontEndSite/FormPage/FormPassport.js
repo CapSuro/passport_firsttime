@@ -1,23 +1,27 @@
 import React from 'react';
-import {
-  Form,
-  Input,
-  Tooltip,
-  Icon,
-  Select,
-  Row,
-  Col,
-  Button,
-  DatePicker
-} from 'antd';
+import { provinces } from './../../provinces';
+import { Form, Input, Tooltip, Icon, Select, Row, Col, Button, DatePicker } from 'antd';
+import { district } from './../../districts';
+import { nations } from './../../nations';
+import { religions } from './../../religions';
 
 const { Option } = Select;
 
 class RegistrationForm extends React.Component {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: [],
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      confirmDirty: false,
+      autoCompleteResult: [],
+      AddressProvince: null
+    };
+  }
+
+  setAddressProvince = value => {console.log(value)}
+
+  getDistrictsInProvince = (provinceid) =>
+    district.filter(d => d.provinceid === provinceid)
 
   handleSubmit = e => {
     e.preventDefault();
@@ -28,9 +32,6 @@ class RegistrationForm extends React.Component {
     });
   };
 
-  getProvinceOptions = () => 
-    <Option value="A">A</Option>
-  
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -79,7 +80,7 @@ class RegistrationForm extends React.Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} {...this.props}>
+      <Form onSubmit={this.handleSubmit}>
         <Row>
           <Col span={8}>
             <Form.Item label="Fullname">
@@ -115,14 +116,14 @@ class RegistrationForm extends React.Component {
                   },
                 ],
               })(<Select>
-                {this.getProvinceOptions()}
+                {provinces.map(p => <Option value={p.value} key={p.value}>{p.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={6}>
-            <Form.Item label="Gender" {...this.props}>
+            <Form.Item label="Gender">
               {getFieldDecorator('gender', {
                 rules: [
                   {
@@ -155,8 +156,7 @@ class RegistrationForm extends React.Component {
           <Col span={5} offset={1}>
             <Form.Item label="PID Place">
               {getFieldDecorator('pidplace')(<Select>
-                <Option value="dongthap">Dong Thap</Option>
-                <Option value="vinhlong">Vinh Long</Option>
+                {provinces.map(p => <Option value={p.value} key={p.value}>{p.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
@@ -165,18 +165,14 @@ class RegistrationForm extends React.Component {
           <Col span={8}>
             <Form.Item label="Nation">
               {getFieldDecorator('nation')(<Select>
-                <Option value="1">Nation 1</Option>
-                <Option value="2">Nation 2</Option>
-                <Option value="3">Nation 3</Option>
+                {nations.map(n => <Option value={n.value} key={n.value}>{n.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
           <Col span={7} offset={1}>
             <Form.Item label="Religion">
               {getFieldDecorator('religion')(<Select>
-                <Option value="1">Religion 1</Option>
-                <Option value="2">Religion 2</Option>
-                <Option value="3">Religion 3</Option>
+                {religions.map(r => <Option value={r.value} key={r.value}>{r.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
@@ -193,7 +189,7 @@ class RegistrationForm extends React.Component {
         </Row>
         <Row>
           <Col span={8}>
-            <Form.Item label={<span>Addredd Province&nbsp;
+            <Form.Item label={<span>Address Province&nbsp;
               <Tooltip title="write based on Registration book">
                 <Icon type="question-circle-o" />
               </Tooltip>
@@ -205,9 +201,8 @@ class RegistrationForm extends React.Component {
                     message: 'Please select your Address Province!',
                   }
                 ],
-              })(<Select>
-                <Option value="dongthap">Dong Thap</Option>
-                <Option value="vinhlong">Vinh Long</Option>
+              })(<Select onChange={()=>console.log("change")}>
+                {provinces.map(p => <Option value={p.value} key={p.value}>{p.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
@@ -225,8 +220,7 @@ class RegistrationForm extends React.Component {
                   }
                 ],
               })(<Select>
-                <Option value="nhaman">Nha Man</Option>
-                <Option value="sadec">Sa Dec</Option>
+                <Option value="1">{this.state.AddressProvince}</Option>
               </Select>)}
             </Form.Item>
           </Col>
