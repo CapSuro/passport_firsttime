@@ -1,15 +1,34 @@
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HomePage } from './../HomePage/HomePage';
 import { MonitorPage } from './../MonitorPage/MonitorPage';
 import { FormPage } from '../FormPage/FormPage';
+import { loadData } from './../ActionCreators';
+import { DataTypes } from '../Types';
+import { connect } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export const Entry = (props) => {
+const mapStateToProps = (store) => ({
+    ...store
+});
+
+const mapDispatchToProps = {
+    loadData
+}
+
+const EntryComponent = (props) => {
     const [collapsed, setCollapsed] = useState(false);
+
+    useEffect(()=>{
+        props.loadData(DataTypes.NATIONS);
+        props.loadData(DataTypes.PROVINCES);
+        props.loadData(DataTypes.RELIGIONS);
+        props.loadData(DataTypes.DISTRICTS);
+    });
+
     return (<Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>
             <div className="logo">QikPassport</div>
@@ -38,3 +57,5 @@ export const Entry = (props) => {
         </Layout>
     </Layout>)
 }
+
+export const Entry = connect(mapStateToProps, mapDispatchToProps)(EntryComponent);

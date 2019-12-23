@@ -1,8 +1,8 @@
 export const DataTypes = {
-    RELIGION: 'RELIGION',
-    NATION: 'NATION',
-    PROVINCE: 'PROVINCE',
-    DISTRICT: 'DISTRICT'
+    RELIGIONS: 'RELIGIONS',
+    NATIONS: 'NATIONS',
+    PROVINCES: 'PROVINCES',
+    DISTRICTS: 'DISTRICTS'
 }
 
 export const ActionTypes = {
