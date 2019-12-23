@@ -50,7 +50,7 @@ const EntryComponent = (props) => {
         <Layout>
             <Header style={{ background: '#fff', padding: 0 }} />
             <Content style={{ margin: '0 16px' }}>
-                {props.location['pathname'] === "/passport_form" ? <FormPage /> :
+                {props.location['pathname'] === "/passport_form" ? <FormPage {...props}/> :
                     props.location['pathname'] === "/monitor" ? <MonitorPage /> : <HomePage />}
             </Content>
             <Footer style={{ textAlign: 'center' }}>QIkPassport ©2018 all right reserved</Footer>

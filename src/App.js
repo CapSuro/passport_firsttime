@@ -1,19 +1,23 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './FrontEndSite/HomePage/HomePage.css'
-import {BrowserRouter as Router, Route,Switch, Redirect} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 //import { BackendEntry } from './BackEndSite/BackEndEntry/BackEndEntry';
 import { Entry } from './FrontEndSite/EntryPage/Entry';
+import { Provider } from 'react-redux';
+import { PassportStore } from './FrontEndSite/PassportStore';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" component={Entry}></Route>
-          <Redirect to="/" />
-        </Switch>
-      </Router>
+      <Provider store={PassportStore}>
+        <Router>
+          <Switch>
+            <Route path="/" component={Entry}></Route>
+            <Redirect to="/" />
+          </Switch>
+        </Router>
+      </Provider>
     </div>
   );
 }

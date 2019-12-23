@@ -1,6 +1,6 @@
 import { ActionTypes } from "./Types";
 
-export const Reducer = (store, action) => {
+export const PassportReducer = (store, action) => {
     switch (action.type) {
         case ActionTypes.DATA_LOAD:
             return {
