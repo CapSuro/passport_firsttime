@@ -14,14 +14,15 @@ class RegistrationForm extends React.Component {
     this.state = {
       confirmDirty: false,
       autoCompleteResult: [],
-      AddressProvince: null
+      AddressProvince: null,
+      StayingProvince: null,
+      ApointmentProvince: null
     };
   }
 
-  setAddressProvince = value => {console.log(value)}
+  setAddressProvince = value => { this.setState({ AddressProvince: value }) }
 
-  getDistrictsInProvince = (provinceid) =>
-    district.filter(d => d.provinceid === provinceid)
+  getDistrictByProvince = provinceid => district.filter(d => d.provinceid === provinceid)
 
   handleSubmit = e => {
     e.preventDefault();
@@ -190,7 +191,7 @@ class RegistrationForm extends React.Component {
         <Row>
           <Col span={8}>
             <Form.Item label={<span>Address Province&nbsp;
-              <Tooltip title="write based on Registration book">
+              <Tooltip title="write based on your Registration book">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>}>
@@ -198,16 +199,16 @@ class RegistrationForm extends React.Component {
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Address Province!',
+                    message: 'Please select your Address Province!'
                   }
-                ],
-              })(<Select onChange={()=>console.log("change")}>
-                {provinces.map(p => <Option value={p.value} key={p.value}>{p.name}</Option>)}
+                ]
+              })(<Select onChange={value => this.setAddressProvince(value)}>
+                {provinces.map(p => <Option key={p.value} value={p.value}>{p.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
           <Col span={7} offset={1}>
-            <Form.Item label={<span>Addredd District&nbsp;
+            <Form.Item label={<span>Address District&nbsp;
               <Tooltip title="write based on Registration book">
                 <Icon type="question-circle-o" />
               </Tooltip>
@@ -220,12 +221,16 @@ class RegistrationForm extends React.Component {
                   }
                 ],
               })(<Select>
-                <Option value="1">{this.state.AddressProvince}</Option>
+                {this.getDistrictByProvince(this.state.AddressProvince).map(d => <Option
+                  key={d.value}
+                  value={d.value}>
+                  {d.name}
+                </Option>)}
               </Select>)}
             </Form.Item>
           </Col>
           <Col span={7} offset={1}>
-            <Form.Item label={<span>Addredd Detail&nbsp;
+            <Form.Item label={<span>Address Detail&nbsp;
               <Tooltip title="write based on Registration book">
                 <Icon type="question-circle-o" />
               </Tooltip>
@@ -248,9 +253,8 @@ class RegistrationForm extends React.Component {
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>}>
-              {getFieldDecorator('addprovince')(<Select>
-                <Option value="dongthap">Dong Thap</Option>
-                <Option value="vinhlong">Vinh Long</Option>
+              {getFieldDecorator('stayingprovince')(<Select onChange={value => this.setState({ StayingProvince: value })}>
+                {provinces.map(p => <Option key={p.value} value={p.value}>{p.name}</Option>)}
               </Select>)}
             </Form.Item>
           </Col>
@@ -260,9 +264,12 @@ class RegistrationForm extends React.Component {
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>}>
-              {getFieldDecorator('adddistrict')(<Select>
-                <Option value="nhaman">Nha Man</Option>
-                <Option value="sadec">Sa Dec</Option>
+              {getFieldDecorator('stayingdistrict')(<Select>
+                {this.getDistrictByProvince(this.state.StayingProvince).map(d => <Option
+                  key={d.value}
+                  value={d.value}>
+                  {d.name}
+                </Option>)}
               </Select>)}
             </Form.Item>
           </Col>
@@ -272,7 +279,7 @@ class RegistrationForm extends React.Component {
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>}>
-              {getFieldDecorator('staydetail')(<Input />)}
+              {getFieldDecorator('stayingdetail')(<Input />)}
             </Form.Item>
           </Col>
         </Row>
@@ -350,11 +357,9 @@ class RegistrationForm extends React.Component {
                     message: 'Please select receiving organization!'
                   },
                 ],
-              })(<Select>
-                <Option value="1">Province 1</Option>
-                <Option value="2">Province 2</Option>
-                <Option value="3">Province 3</Option>
-              </Select>)}
+              })(<Select onChange={value => this.setState({ApointmentProvince:value})}>
+              {provinces.map(p => <Option key={p.value} value={p.value}>{p.name}</Option>)}
+            </Select>)}
             </Form.Item>
           </Col>
           <Col span={11} offset={1}>
